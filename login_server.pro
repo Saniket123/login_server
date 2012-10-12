@@ -22,3 +22,25 @@ HEADERS += \
 
 SOURCES += \
     tcp_receiver.cpp
+
+OTHER_FILES += \
+    face_recognition/PCAModel.bin \
+    face_recognition/GalleryPeopleNum.ini \
+    face_recognition/GalleryPCACoeff.bin
+
+HEADERS += \
+    face_recognition/MemoryOper.h \
+    face_recognition/MatrixOper.h \
+    face_recognition/BasicDataType.h \
+    face_recognition/AffineTrans.h
+
+SOURCES += \
+    face_recognition/MatrixOper.cpp \
+    face_recognition/face recognition.cpp \
+    face_recognition/AffineTrans.cpp
+
+HEADERS += \
+    face_recognition.h
+
+SOURCES += \
+    face_recognition.cpp
