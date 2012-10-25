@@ -1,0 +1,138 @@
+// BasicDataType.h: interface for the CBasicDataType class.
+
+
+#if !defined(AFX_BASICDATATYPE_H__AB497EBE_BDF7_45C4_9B78_C54592D6410E__INCLUDED_)
+#define AFX_BASICDATATYPE_H__AB497EBE_BDF7_45C4_9B78_C54592D6410E__INCLUDED_
+
+#if _MSC_VER > 1000
+#pragma once
+#endif // _MSC_VER > 1000
+
+#include <math.h>
+#include <stdlib.h>
+#include "stdio.h"
+#include <time.h> 
+#include <iostream>
+using namespace std;
+
+#define OUT
+
+//typedef int int;
+typedef unsigned long dword;
+//typedef double double;
+typedef unsigned char byte;
+typedef unsigned long dword;
+//typedef char char;
+//typedef long bool;
+//typedef byte BYTE;
+typedef short int int16;
+//typedef bool BOOL;
+
+#define INT_MAX0 2147483647
+#define INT_MIN0 (-2147483647-1)
+
+#define ROUND_int32(f) ((f)>0 ? ( (int)((f)+0.5) ) : ( (int)((f)-0.5) ))
+#define ROUND_uint32(f) ((int)((f)+0.5))
+#define FREE( p ) if( NULL!=p ) { free( p ); p = NULL; }
+
+#ifndef CLIP
+#define CLIP(a) ((a)>255?255:((a)<0?0:(a)))
+#endif
+
+#ifndef max
+#define max(a,b)            (((a) > (b)) ? (a) : (b))
+#endif
+#ifndef min
+#define min(a,b)            (((a) < (b)) ? (a) : (b))
+#endif
+
+#ifndef PI
+#define PI 3.1415926536
+#endif
+
+#ifndef NEAR_ZERO
+#define NEAR_ZERO (1e-20f)
+#endif
+
+#ifndef IN
+#define IN
+#endif
+
+#ifndef OUT
+#define OUT
+#endif
+
+
+
+typedef struct s_Point
+{
+	int x;
+	int y;
+}
+s_Point;
+
+typedef struct s_Point_32f
+{
+	float x;
+	float y;
+}
+s_Point_32f;
+
+typedef struct s_Point_f64
+{
+	double x;
+	double y;
+}
+s_Point_f64;
+
+typedef struct s_PointArray
+{
+	int maxNum;
+	int actNum;
+	s_Point * pArray;
+}
+s_PointArray;
+
+typedef struct s_RectSize
+{
+	int width;
+	int height;
+}
+s_RectSize;
+
+typedef struct s_Rect
+{
+	int left;
+	int top;
+	int right;
+	int bottom;
+}
+s_Rect;
+
+typedef struct s_RectArray
+{
+	s_Rect * pArray;
+	int maxNum;
+	int actNum;
+}
+s_RectArray;
+
+typedef struct s_VifdRect_ltsize
+{
+	s_Point ltPt;
+	s_RectSize rectSize;
+}
+s_VifdRect_ltsize;
+
+typedef struct s_Rect_f64
+{
+	double left;
+	double top;
+	double right;
+	double bottom;
+}
+s_Rect_f64;
+
+typedef struct s_Ellipse
+{
+	s_Point centerPoint; //

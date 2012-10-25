@@ -1,10 +1,10 @@
 #include <QCoreApplication>
-#include "tcp_receiver.h"
+#include "login_server.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    tcp_receiver my_tcp_receiver;
-    my_tcp_receiver.start();
+    login_server my_login_server;
+    my_login_server.start();
     return a.exec();
 }

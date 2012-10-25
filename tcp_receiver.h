@@ -22,6 +22,8 @@ private slots:
     void accept_connection();
     void receive();
     void display_error(QAbstractSocket::SocketError socket_error);
+signals:
+    void img_received(QString file_path);
 public:
     void start();
 };

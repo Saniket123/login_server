@@ -36,7 +36,6 @@ HEADERS += \
 
 SOURCES += \
     face_recognition/MatrixOper.cpp \
-    face_recognition/face recognition.cpp \
     face_recognition/AffineTrans.cpp
 
 HEADERS += \
@@ -44,3 +43,31 @@ HEADERS += \
 
 SOURCES += \
     face_recognition.cpp
+
+HEADERS += \
+    pcamodel.h
+
+SOURCES += \
+    pcamodel.cpp
+
+HEADERS += \
+    login_server.h
+
+SOURCES += \
+    login_server.cpp
+
+unix{
+    CONFIG += link_pkgconfig
+    PKGCONFIG += opencv
+}
+
+win32{
+    INCLUDEPATH += "C:/opencv/opencv/build/include/opencv" \
+                   "C:/opencv/opencv/build/include"
+
+    LIBS += "C:/opencv/lib/libopencv_core241.dll.a" \
+            "C:/opencv/lib/libopencv_features2d241.dll.a" \
+            "C:/opencv/lib/libopencv_highgui241.dll.a" \
+            "C:/opencv/lib/libopencv_video241.dll.a" \
+            "C:/opencv/lib/libopencv_imgproc241.dll.a"
+}

@@ -34,7 +34,6 @@ void tcp_receiver::receive()
 {
     qDebug() << "in receive";
 
-
     QDataStream in(this->tcp_server_connection);
     if(this->bytes_received <= sizeof(qint64) * 2) { //如果接收到的数据小于16个字节，那么是刚开始接收数据，我们保存到//来的头文件信息
         if((this->tcp_server_connection->bytesAvailable() >= sizeof(qint64) * 2) && (this->file_name_size == 0)) { //接收数据总大小信息和文件名大小信息
@@ -52,8 +51,7 @@ void tcp_receiver::receive()
                 qDebug() << "open file error!";
                 return;
             }
-        }
-        else return;
+        } else return;
    }
    if(this->bytes_received < this->total_bytes) {  //如果接收的数据小于总数据，那么写入文件
        this->bytes_received += this->tcp_server_connection->bytesAvailable();
@@ -64,5 +62,6 @@ void tcp_receiver::receive()
    if(this->bytes_received == this->total_bytes) { //接收数据完成时
     this->tcp_server_connection->close();
     this->local_file->close();
+    emit img_received(this->local_file->fileName());
    }
 }

@@ -135,9 +135,9 @@ s_Rect_f64;
 
 typedef struct s_Ellipse
 {
-	s_Point centerPoint; //æ¤­åœ†ä¸­å¿ƒ
-	int rad_x; //æ¨ªåæ ‡æ–¹å‘æ¤­åœ†çš„åŠå¾„
-	int rad_y; //çºµåæ ‡æ–¹å‘æ¤­åœ†çš„åŠå¾„
+	s_Point centerPoint; //ÍÖÔ²ÖĞĞÄ
+	int rad_x; //ºá×ø±ê·½ÏòÍÖÔ²µÄ°ë¾¶
+	int rad_y; //×İ×ø±ê·½ÏòÍÖÔ²µÄ°ë¾¶
 }
 s_Ellipse;
 
@@ -293,27 +293,27 @@ typedef struct s_RotateAngle
 }
 s_RotateAngle;
 
-// èŒƒæ•°ç±»å‹
+// ·¶ÊıÀàĞÍ
 typedef enum e_NormType 
 { 
 	n1_norm, n2_norm, max_norm 
 }
 e_NormType;
 
-//æ•°æ®ç±»å‹
+//Êı¾İÀàĞÍ
 typedef enum data_type 
 {
 	type_int32, type_double, type_int16, type_byte, type_float 
 }
 data_type;
 
-//å›¾åƒç±»å‹
+//Í¼ÏñÀàĞÍ
 typedef enum ImageType
 {
 	it_gray, it_flipgray, it_RGB24, it_flipRGB24, it_BGR24, it_flipBGR24, it_YUV444, it_YUV422,
 }ImageType;
 
-// ç”¨æ¥è¡¨ç¤ºçŸ©å½¢æ•°ç»„ï¼Œç”¨äºè®¡ç®—æŸäº›åŸºäºåŒºåŸŸçš„ç›´æ–¹å›¾ç‰¹å¾
+// ÓÃÀ´±íÊ¾¾ØĞÎÊı×é£¬ÓÃÓÚ¼ÆËãÄ³Ğ©»ùÓÚÇøÓòµÄÖ±·½Í¼ÌØÕ÷
 typedef struct s_RegFeat
 {
 	int normCase;
@@ -329,7 +329,7 @@ typedef struct s_RegFeatArray
 }
 s_RegFeatArray;
 
-// ç”¨äºå®šä¹‰haarå¾®ç»“æ„ä¿¡æ¯
+// ÓÃÓÚ¶¨ÒåhaarÎ¢½á¹¹ĞÅÏ¢
 typedef struct s_HaarPara
 {
 	int modelWidth;
@@ -341,7 +341,7 @@ s_HaarPara;
 typedef struct s_HaarFeat
 {
 	int haarCase;
-	int times[MAX_RECT_NUM]; // shift to rightï¼Œç”¨timesè¡¨ç¤ºï¼Œä¾¿äºæ‰©å±•
+	int times[MAX_RECT_NUM]; // shift to right£¬ÓÃtimes±íÊ¾£¬±ãÓÚÀ©Õ¹
 	s_Rect rect[MAX_RECT_NUM];
 	int area[MAX_RECT_NUM];
 	int rectNum;
@@ -357,7 +357,7 @@ typedef struct s_HaarFeatPool
 }
 s_HaarFeatPool;
 
-//ç§¯åˆ†å›¾åƒçš„å®šä¹‰
+//»ı·ÖÍ¼ÏñµÄ¶¨Òå
 typedef struct s_IntegIntegSqImg
 {
 	int planeNum;
@@ -367,7 +367,7 @@ typedef struct s_IntegIntegSqImg
 }
 s_IntegIntegSqImg;
 
-// æŒ‡å®šæ¯ä¸ªå½’ä¸€åŒ–HOGç‰¹å¾çš„çŸ©å½¢æ•°ç›®å’Œå¤šä¸ªçŸ©å½¢åæ ‡
+// Ö¸¶¨Ã¿¸ö¹éÒ»»¯HOGÌØÕ÷µÄ¾ØĞÎÊıÄ¿ºÍ¶à¸ö¾ØĞÎ×ø±ê
 typedef struct s_NormedHOGReg
 {
 	int rectNum;
@@ -375,10 +375,10 @@ typedef struct s_NormedHOGReg
 }
 s_NormedHOGReg;
 
-// ç”¨äºè®°å½•å¿«é€Ÿå½’ä¸€åŒ–HOGç‰¹å¾
-// HOGRegNumä¸ºHOGç‰¹å¾æ•°ç›®ï¼Œæ¯ä¸ªå¯¹åº”ç›¸é‚»çš„ä¸€ç»„çŸ©å½¢
-// directNumæŒ‡å®šHOGçš„å½’ä¸€åŒ–æ–¹å‘
-// bSignedæŒ‡å®šHOGçš„æ–¹å‘æ˜¯å¦ä¸ºæœ‰ç¬¦å·çš„
+// ÓÃÓÚ¼ÇÂ¼¿ìËÙ¹éÒ»»¯HOGÌØÕ÷
+// HOGRegNumÎªHOGÌØÕ÷ÊıÄ¿£¬Ã¿¸ö¶ÔÓ¦ÏàÁÚµÄÒ»×é¾ØĞÎ
+// directNumÖ¸¶¨HOGµÄ¹éÒ»»¯·½Ïò
+// bSignedÖ¸¶¨HOGµÄ·½ÏòÊÇ·ñÎªÓĞ·ûºÅµÄ
 typedef struct s_NormedHOGRegArray
 {
 	int bSigned;
@@ -391,7 +391,7 @@ s_NormedHOGRegArray;
 extern "C"
 {
 	//////////////////////////////////////////////////////////////////////////
-	//å‡½æ•°åŠŸèƒ½ï¼šè¿”å›æŒ‡å®šæ•°æ®ç±»å‹çš„é•¿åº¦                                      //
+	//º¯Êı¹¦ÄÜ£º·µ»ØÖ¸¶¨Êı¾İÀàĞÍµÄ³¤¶È                                      //
 	//////////////////////////////////////////////////////////////////////////
 	static inline int GetDataSize( const data_type dataType )
 	{
@@ -422,14 +422,14 @@ extern "C"
 		return( dataSize );
 	};
 
-	//è¿”å›dwordå‹çš„å¹³æ–¹æ ¹
+	//·µ»ØdwordĞÍµÄÆ½·½¸ù
 	static inline dword Sqrt( dword sqVal )
 	{
 		unsigned long divisor;
 		int i;
 
-		dword root = 0; // æ–¹æ ¹
-		unsigned long rem = 0;// æ¯æ¬¡å¤„ç†åçš„ä½™æ•°
+		dword root = 0; // ·½¸ù
+		unsigned long rem = 0;// Ã¿´Î´¦ÀíºóµÄÓàÊı
 
 		for( i=0; i<16; i++ )
 		{
@@ -453,10 +453,10 @@ extern "C"
 	}
 
 	//////////////////////////////////////////////////////////////////////////
-	//å‡½æ•°åŠŸèƒ½ï¼šè¿”å›[minã€max]èŒƒå›´å†…çš„intå‹çš„éšæœºæ•° ï¼Œ                      //
-	//          è‹¥min < max ,è¿”å›(minã€max)èŒƒå›´å†…çš„intå‹çš„éšæœºæ•°            //
-	//          è‹¥min = max ,è¿”å›min                                        //
-	//          è‹¥min > max ,è¿”å›min - 1                                    //
+	//º¯Êı¹¦ÄÜ£º·µ»Ø[min¡¢max]·¶Î§ÄÚµÄintĞÍµÄËæ»úÊı £¬                      //
+	//          Èômin < max ,·µ»Ø(min¡¢max)·¶Î§ÄÚµÄintĞÍµÄËæ»úÊı            //
+	//          Èômin = max ,·µ»Ømin                                        //
+	//          Èômin > max ,·µ»Ømin - 1                                    //
 	//////////////////////////////////////////////////////////////////////////
 	static inline int GetRand( int Min, int Max )
 	{
@@ -488,10 +488,10 @@ extern "C"
 
 
 	//////////////////////////////////////////////////////////////////////////
-	//å‡½æ•°åŠŸèƒ½ï¼šè¿”å›[minã€max]èŒƒå›´å†…çš„doubleå‹çš„éšæœºæ•° ï¼Œ                   //
-	//          è‹¥min < max ,è¿”å›(minã€max)èŒƒå›´å†…çš„doubleå‹çš„éšæœºæ•°         //
-	//          è‹¥min = max ,è¿”å›min                                        //
-	//          è‹¥min > max ,è¿”å›min - 1                                    //
+	//º¯Êı¹¦ÄÜ£º·µ»Ø[min¡¢max]·¶Î§ÄÚµÄdoubleĞÍµÄËæ»úÊı £¬                   //
+	//          Èômin < max ,·µ»Ø(min¡¢max)·¶Î§ÄÚµÄdoubleĞÍµÄËæ»úÊı         //
+	//          Èômin = max ,·µ»Ømin                                        //
+	//          Èômin > max ,·µ»Ømin - 1                                    //
 	//////////////////////////////////////////////////////////////////////////
 	static inline double GetRand_64f( double Min, double Max )
 	{
@@ -523,7 +523,7 @@ extern "C"
 
 
 
-	// å‡ºç°trueçš„æ¦‚ç‡çº¦ä¸ºrandRatio
+	// ³öÏÖtrueµÄ¸ÅÂÊÔ¼ÎªrandRatio
 	static inline bool BeRandVld( double randRatio )
 	{
 		int curRand = rand();
@@ -533,9 +533,9 @@ extern "C"
 
 
 
-	//----------------------------ç‚¹æ“ä½œ--------------------------------------------------------------//
+	//----------------------------µã²Ù×÷--------------------------------------------------------------//
 	
-	//ä¸ºs_Pointç»“æ„èµ‹å€¼
+	//Îªs_Point½á¹¹¸³Öµ
 	static inline s_Point SetPoint( int x, int y )
 	{
 		s_Point tempPoint;
@@ -544,7 +544,7 @@ extern "C"
 		return( tempPoint );
 	};
 
-	//è¿”å›åç§»äº†ï¼ˆshiftxï¼Œshiftyï¼‰çš„åæ ‡
+	//·µ»ØÆ«ÒÆÁË£¨shiftx£¬shifty£©µÄ×ø±ê
 	static inline s_Point ShiftPoint( s_Point srcPoint, int shiftx, int shifty )
 	{
 		s_Point tempPoint;
@@ -553,7 +553,7 @@ extern "C"
 		return( tempPoint );
 	};
 
-	//è¿”å›åç§»äº†ï¼ˆshiftxï¼Œshiftyï¼‰çš„åæ ‡
+	//·µ»ØÆ«ÒÆÁË£¨shiftx£¬shifty£©µÄ×ø±ê
 	static inline s_Point_f64 ShiftPoint_f64( s_Point_f64 srcPoint, int shiftx, int shifty )
 	{
 		s_Point_f64 tempPoint;
@@ -562,7 +562,7 @@ extern "C"
 		return( tempPoint );
 	};
 
-	//è¿”å›ä¸¤ç‚¹é—´çš„æ¬§æ°è·ç¦»
+	//·µ»ØÁ½µã¼äµÄÅ·ÊÏ¾àÀë
 	static inline int GetPointDis( s_Point point1, s_Point point2 )
 	{
 		int xDis = point1.x - point2.x;
@@ -571,7 +571,7 @@ extern "C"
 		return( Sqrt( xDis * xDis + yDis * yDis ) );
 	};
 
-	//è¿”å›ä¸¤ç‚¹é—´çš„æ¬§æ°è·ç¦»
+	//·µ»ØÁ½µã¼äµÄÅ·ÊÏ¾àÀë
 	static inline double GetPointDis_f64( s_Point point1, s_Point point2 )
 	{
 		double xDis = point1.x - point2.x;
@@ -580,7 +580,7 @@ extern "C"
 		return( sqrt( xDis * xDis + yDis * yDis ) );
 	};
 
-	//è¿”å›ä¸¤ç‚¹é—´çš„ä¸­å¿ƒç‚¹
+	//·µ»ØÁ½µã¼äµÄÖĞĞÄµã
 	static inline s_Point GetCenterPoint( s_Point point1, s_Point point2 )
 	{
 		return( SetPoint( ( point1.x + point2.x + 1 ) / 2 , ( point1.y + point2.y + 1 ) / 2 ) );
@@ -597,8 +597,8 @@ extern "C"
 
 
 
-	//----------------------------åŒºåŸŸæ“ä½œ--------------------------------------------------------------//
-	//ä¸ºrectèµ‹å€¼
+	//----------------------------ÇøÓò²Ù×÷--------------------------------------------------------------//
+	//Îªrect¸³Öµ
 	static inline s_Rect SetVifdRect( int left, int top, int right, int bottom )
 	{
 		s_Rect tempRect;
@@ -609,19 +609,19 @@ extern "C"
 		return( tempRect );
 	};
 
-	//è¿”å›rectæŒ‡å®šåŒºåŸŸé¢ç§¯
+	//·µ»ØrectÖ¸¶¨ÇøÓòÃæ»ı
 	static inline int GetRectArea( s_Rect rect )
 	{
 		return( (rect.right - rect.left) * (rect.bottom-rect.top) );
 	};
 
-	//è¿”å›åŒºåŸŸé¢ç§¯
+	//·µ»ØÇøÓòÃæ»ı
 	static inline int GetRectArea_Size( s_RectSize rectSize )
 	{
 		return( rectSize.width*rectSize.height );
 	};
 
-	//å°†valé™å®šåœ¨[min,max]å†…
+	//½«valÏŞ¶¨ÔÚ[min,max]ÄÚ
 	static inline void  LimitVal_basc( int* pVal, int minVal, int maxVal )
 	{
 		if( (*pVal) < minVal )
@@ -635,7 +635,7 @@ extern "C"
 			}
 	}
 
-	//åˆ¤æ–­pRectæ˜¯å¦åœ¨æŒ‡å®šåŒºåŸŸlimitRangeå†…
+	//ÅĞ¶ÏpRectÊÇ·ñÔÚÖ¸¶¨ÇøÓòlimitRangeÄÚ
 	static inline bool LimitRect( s_Rect * pRect, s_Rect limitRange )
 	{
 		LimitVal_basc( &(pRect->left), limitRange.left, limitRange.right );
@@ -647,7 +647,7 @@ extern "C"
 	};
 
 
-	//å‡½æ•°åŠŸèƒ½ï¼šè¿”å›å®½ä¸ºdesWidthï¼Œ é«˜ä¸ºdesHeightï¼Œå¹¶ä¸srcRectæ‹¥æœ‰å…±åŒä¸­å¿ƒç‚¹çš„åŒºåŸŸ
+	//º¯Êı¹¦ÄÜ£º·µ»Ø¿íÎªdesWidth£¬ ¸ßÎªdesHeight£¬²¢ÓësrcRectÓµÓĞ¹²Í¬ÖĞĞÄµãµÄÇøÓò
 	static inline s_Rect GetRectSameCenter( s_Rect srcRect, int desWidth, int desHeight )
 	{
 		int srcWidth = srcRect.right - srcRect.left;
@@ -664,8 +664,8 @@ extern "C"
 		return(desRect);
 	};
 
-	//å¾—åˆ°åœ¨æŒ‡å®šåŒºåŸŸï¼ˆint leftLimit, int topLimit, int rightLimit, int bottomLimiï¼‰å†…ï¼Œ
-	//æŒ‡å®šä¸­å¿ƒç‚¹ï¼ˆcenterX, centerYï¼‰ï¼ŒæŒ‡å®šå®½rectWidth, æŒ‡å®šé«˜int rectHeightçš„åŒºåŸŸ
+	//µÃµ½ÔÚÖ¸¶¨ÇøÓò£¨int leftLimit, int topLimit, int rightLimit, int bottomLimi£©ÄÚ£¬
+	//Ö¸¶¨ÖĞĞÄµã£¨centerX, centerY£©£¬Ö¸¶¨¿írectWidth, Ö¸¶¨¸ßint rectHeightµÄÇøÓò
 	static inline s_Rect GetValidRect(  int centerX, int centerY, int rectWidth, int rectHeight, int leftLimit, int topLimit, 
 		int rightLimit, int bottomLimit )
 	{
@@ -697,7 +697,7 @@ extern "C"
 		return( validRect );
 	};
 
-	//åŒºåŸŸpRectæ˜¯å¦åœ¨åŒºåŸŸï¼ˆ int leftLimit, int topLimit, int rightLimit, int bottomLimitï¼‰å†…
+	//ÇøÓòpRectÊÇ·ñÔÚÇøÓò£¨ int leftLimit, int topLimit, int rightLimit, int bottomLimit£©ÄÚ
 	static inline bool IsValidRect(  s_Rect* pRect, int leftLimit, int topLimit, int rightLimit, int bottomLimit )
 	{
 		if( pRect->left >= leftLimit && pRect->top >= topLimit && pRect->right <= rightLimit && pRect->bottom <= bottomLimit )
@@ -710,7 +710,7 @@ extern "C"
 		}
 	};
 
-	//å¾—åˆ°rectçš„å®½é«˜
+	//µÃµ½rectµÄ¿í¸ß
 	static inline s_RectSize GetRectSize( s_Rect rect )
 	{
 		s_RectSize rectSize;
@@ -719,27 +719,27 @@ extern "C"
 		return( rectSize );
 	};
 
-	//å¾—åˆ°rectçš„å®½é«˜
+	//µÃµ½rectµÄ¿í¸ß
 	static inline void GetRectSize_WH( int* pWidth, int* pHeight, s_Rect rect )
 	{
 		(*pWidth) = rect.right - rect.left;
 		(*pHeight) = rect.bottom - rect.top;
 	};
 
-	//å¾—åˆ°
+	//µÃµ½
 	static inline s_Rect GetVerFlipRect( s_Rect srcRect, int width )
 	{
 		return( SetVifdRect( width - srcRect.right, srcRect.top, width - srcRect.left, srcRect.bottom ) );
 	};
 
-	//å¾—åˆ°rectçš„ä¸­å¿ƒç‚¹
+	//µÃµ½rectµÄÖĞĞÄµã
 	static inline s_Point GetRectCenterPoint( s_Rect rect )
 	{
 		return( SetPoint( ((rect.left + rect.right+1)>>1), ((rect.top + rect.bottom+1)>>1) ) );
 	};
 
-	// ç›¸å¯¹çŸ©å½¢ä¸­å¿ƒæ”¾ç¼©çŸ©å½¢ï¼Œä¸­å¿ƒåæ ‡ä¸å˜ï¼Œå››å‘¨ä¼¸ç¼©æˆ–è€…æ‰©å¼ 
-	// éœ€è¦å¯¹å¤„ç†ç»“æœè¿›è¡Œæ˜¯å¦è¶…å‡ºå›¾åƒèŒƒå›´åˆ¤æ–­
+	// Ïà¶Ô¾ØĞÎÖĞĞÄ·ÅËõ¾ØĞÎ£¬ÖĞĞÄ×ø±ê²»±ä£¬ËÄÖÜÉìËõ»òÕßÀ©ÕÅ
+	// ĞèÒª¶Ô´¦Àí½á¹û½øĞĞÊÇ·ñ³¬³öÍ¼Ïñ·¶Î§ÅĞ¶Ï
 	static inline s_Rect EnlargeRect_64f( s_Rect * pRect, double widthZoomRatio, double heightZoomRatio )
 	{
 		double widthStep;
@@ -765,15 +765,15 @@ extern "C"
 		return( desRect );
 	};
 
-	// å°†æ‰€æœ‰ä¸Šï¼Œä¸‹ï¼Œå·¦ï¼Œå³åæ ‡å‡æ‰©å¤§ zoomRatio å€
-	// ä¸­å¿ƒä½ç½®ä¹Ÿæ”¾å¤§äº† zoomRatio å€
+	// ½«ËùÓĞÉÏ£¬ÏÂ£¬×ó£¬ÓÒ×ø±ê¾ùÀ©´ó zoomRatio ±¶
+	// ÖĞĞÄÎ»ÖÃÒ²·Å´óÁË zoomRatio ±¶
 	static inline s_Rect ZoomRect_64f( s_Rect rect, double zoomRatio )
 	{
 		return( SetVifdRect( ROUND_uint32(rect.left*zoomRatio), ROUND_uint32(rect.top*zoomRatio), 
 			ROUND_uint32(rect.right*zoomRatio), ROUND_uint32(rect.bottom*zoomRatio) ) );
 	};
 
-	//å°†æ‰€æœ‰ä¸Šï¼Œä¸‹ï¼Œå·¦ï¼Œå³åæ ‡å‡æ‰©å¤§ zoomRatio å€
+	//½«ËùÓĞÉÏ£¬ÏÂ£¬×ó£¬ÓÒ×ø±ê¾ùÀ©´ó zoomRatio ±¶
 	static inline void ResizeRect( s_Rect * pDesRect, s_Rect srcRect, double sizeRatio )
 	{
 		pDesRect->left = (int)(srcRect.left*sizeRatio + 0.5);
@@ -782,7 +782,7 @@ extern "C"
 		pDesRect->bottom = (int)( srcRect.bottom*sizeRatio + 0.5 );
 	};
 
-	//ä¸ºs_RectSizeèµ‹å€¼
+	//Îªs_RectSize¸³Öµ
 	static inline s_RectSize SetVifdRectSize( int width, int height )
 	{
 		s_RectSize tempRectSize;
@@ -791,14 +791,14 @@ extern "C"
 		return( tempRectSize );
 	};
 
-	//å¾—åˆ°ä¸¤ä¸ªrectçš„å¹³å‡size
+	//µÃµ½Á½¸örectµÄÆ½¾ùsize
 	static inline s_RectSize GetAverageRectSize( s_RectSize tempRectSize1, s_RectSize tempRectSize2 )
 	{
 		return( SetVifdRectSize( (tempRectSize1.width + tempRectSize2.width+1) / 2, (tempRectSize1.height + tempRectSize2.height + 1 ) / 2 ) );
 
 	};
 
-	//å¾—åˆ°æŒ‡å®šä¸­å¿ƒç‚¹å’Œå®½é«˜çš„rect
+	//µÃµ½Ö¸¶¨ÖĞĞÄµãºÍ¿í¸ßµÄrect
 	static inline s_Rect SetRect_CenterSize( int centerX, int centerY, int width, int height )
 	{
 		s_Rect rect;
@@ -821,7 +821,7 @@ extern "C"
 		}
 	};
 
-	//æ±‚åç§»åçš„rect
+	//ÇóÆ«ÒÆºóµÄrect
 	static inline s_Rect ShiftRect( s_Rect srcRect, int shiftx, int shifty )
 	{
 		srcRect.left += shiftx;
@@ -844,7 +844,7 @@ extern "C"
 	};
 
 
-	//è¿”å›èŒƒå›´åœ¨æŒ‡å®šåŒºåŸŸå†…çš„ä¸€ä¸ªé•¿å®½æ¯”ä¸ºfixedRatioçš„éšæœºåŒºåŸŸ
+	//·µ»Ø·¶Î§ÔÚÖ¸¶¨ÇøÓòÄÚµÄÒ»¸ö³¤¿í±ÈÎªfixedRatioµÄËæ»úÇøÓò
 	static inline bool GetRandRect_FixedRatio( s_Rect * pRandRect, s_Rect * pRegion, int minWidth, double fixedRatio )
 	{
 		int maxWidth = min( pRegion->right - pRegion->left, (int)( (pRegion->bottom-pRegion->top) / fixedRatio ) );
@@ -869,8 +869,8 @@ extern "C"
 
 
 
-	//----------------------------ç‚¹å’ŒåŒºåŸŸæ··åˆæ“ä½œ--------------------------------------------------------------//
-	//åˆ¤æ–­ä¸€ç‚¹æ˜¯å¦åœ¨åŒºåŸŸå†…
+	//----------------------------µãºÍÇøÓò»ìºÏ²Ù×÷--------------------------------------------------------------//
+	//ÅĞ¶ÏÒ»µãÊÇ·ñÔÚÇøÓòÄÚ
 	static inline bool IsPointInRect( s_Point point, s_Rect rect )
 	{
 		if( point.x >= rect.left && point.x < rect.right && point.y >= rect.top && point.y < rect.bottom )
@@ -883,7 +883,7 @@ extern "C"
 		}
 	};
 
-	//åˆ¤æ–­ä¸¤ä¸ªrectæ˜¯å¦æœ‰äº¤å åŒºåŸŸï¼Œå¹¶å¾—åˆ°äº¤å å»
+	//ÅĞ¶ÏÁ½¸örectÊÇ·ñÓĞ½»µşÇøÓò£¬²¢µÃµ½½»µşÈ¥
 	static inline bool GetIntersectRect( s_Rect* pInterSectRect, s_Rect* pRect1, s_Rect* pRect2 )
 	{
 		pInterSectRect->left = max( pRect1->left, pRect2->left );
@@ -894,7 +894,7 @@ extern "C"
 		return( (pInterSectRect->right >= pInterSectRect->left) && (pInterSectRect->bottom >= pInterSectRect->top) );
 	};
 
-	//å¾—åˆ°ä¸¤ä¸ªäº¤å åŒºçš„é¢ç§¯
+	//µÃµ½Á½¸ö½»µşÇøµÄÃæ»ı
 	static inline int GetIntersectRectArea( s_Rect * pRect1, s_Rect * pRect2 )
 	{
 		int left = max( pRect1->left, pRect2->left );
@@ -911,7 +911,7 @@ extern "C"
 		}
 	};
 
-	//è¿”å›ä¸¤recté—´çš„å®½é«˜æ¯”çš„ä¹˜ç§¯
+	//·µ»ØÁ½rect¼äµÄ¿í¸ß±ÈµÄ³Ë»ı
 	static inline double GetSizeSimRatio( s_Rect* pRect1, s_Rect* pRect2 )
 	{
 		int width1 = pRect1->right - pRect1->left;
@@ -1013,7 +1013,7 @@ extern "C"
 		int minArea;
 		int coverArea;
 
-		if( coverLeft < coverRight && coverTop < coverBottom ) // äº¤å 
+		if( coverLeft < coverRight && coverTop < coverBottom ) // ½»µş
 		{
 			area1 = GetRectArea( tempObject1 );
 			area2 = GetRectArea( tempObject2 );
@@ -1028,7 +1028,7 @@ extern "C"
 		}
 	};
 
-	//åˆ é™¤rectNumä¸ªå°åŒºåŸŸä¸­é¢ç§¯å°äºminSizeçš„åŒºåŸŸï¼Œå¹¶è¿”å›å‰©ä¸‹åŒºåŸŸçš„æ•°é‡
+	//É¾³ırectNum¸öĞ¡ÇøÓòÖĞÃæ»ıĞ¡ÓÚminSizeµÄÇøÓò£¬²¢·µ»ØÊ£ÏÂÇøÓòµÄÊıÁ¿
 	static inline int DeleteSmallRect( s_Rect *pRectArray, int rectNum, int minSize )
 	{
 		int vldOrder;
@@ -1048,8 +1048,8 @@ extern "C"
 		return( vldOrder );
 	};
 
-	//åˆ¤æ–­ä¸¤ä¸ªçŸ©å½¢æ¡†æ˜¯å¦æ°´å¹³ç›¸é‚»
-	// é«˜åº¦æ¯”è¦æ»¡è¶³ä¸€å®šæ¡ä»¶ï¼Œå‚ç›´æ–¹å‘äº¤å éƒ¨åˆ†è¦æ»¡è¶³ä¸€å®šè¦æ±‚ï¼Œè·ç¦»å°äºä¸€å®šç¨‹åº¦
+	//ÅĞ¶ÏÁ½¸ö¾ØĞÎ¿òÊÇ·ñË®Æ½ÏàÁÚ
+	// ¸ß¶È±ÈÒªÂú×ãÒ»¶¨Ìõ¼ş£¬´¹Ö±·½Ïò½»µş²¿·ÖÒªÂú×ãÒ»¶¨ÒªÇó£¬¾àÀëĞ¡ÓÚÒ»¶¨³Ì¶È
 	static inline bool IsHorNeighborRect( s_Rect tempObject1, s_Rect tempObject2, float sizeRatioThresh, float coverRatioThresh, float disRatioThresh )
 	{
 		int width1 = tempObject1.right-tempObject1.left;
@@ -1063,7 +1063,7 @@ extern "C"
 			heightratio = 1.0f/heightratio;
 		}
 
-		// å¦‚æœé«˜åº¦æ¯”ç›¸å·®å¤ªå¤§ï¼Œåˆ™è®¤ä¸ºä¸ç®—ç›¸é‚»çŸ©å½¢
+		// Èç¹û¸ß¶È±ÈÏà²îÌ«´ó£¬ÔòÈÏÎª²»ËãÏàÁÚ¾ØĞÎ
 		if( heightratio < sizeRatioThresh )
 		{
 			return( false );
@@ -1074,7 +1074,7 @@ extern "C"
 		int coverBottom = min( tempObject1.bottom, tempObject2.bottom );
 		int coverHeight = coverBottom-coverTop;
 
-		// å‚ç›´æ–¹å‘ä¸Šäº¤å éƒ¨åˆ†å¤ªå°ï¼Œåˆ™è®¤ä¸ºä¸ç›¸é‚»äº¤å 
+		// ´¹Ö±·½ÏòÉÏ½»µş²¿·ÖÌ«Ğ¡£¬ÔòÈÏÎª²»ÏàÁÚ½»µş
 		if( coverHeight <= 0 || (coverHeight/(float)avgHeight) < coverRatioThresh )
 		{
 			return( false );
@@ -1086,12 +1086,12 @@ extern "C"
 		int coverWidth = coverRight-coverLeft;
 		//	int avgWidth = (width1+width2+1)/2;
 
-		// å¦‚æœæ°´å¹³è·ç¦»å°äºä¸€å®šç¨‹åº¦ï¼Œåˆ™è®¤ä¸ºç›¸äº¤
+		// Èç¹ûË®Æ½¾àÀëĞ¡ÓÚÒ»¶¨³Ì¶È£¬ÔòÈÏÎªÏà½»
 		return( coverWidth >= 0 || (-coverWidth)/(float)max(width1, width2) < disRatioThresh );
 	};
 
-	// åˆ¤æ–­ä¸¤ä¸ªçŸ©å½¢æ¡†æ˜¯å¦å‚ç›´ç›¸é‚»
-	// å®½åº¦æ¯”è¦æ»¡è¶³ä¸€å®šæ¡ä»¶ï¼Œæ°´å¹³æ–¹å‘äº¤å éƒ¨åˆ†è¦æ»¡è¶³ä¸€å®šè¦æ±‚ï¼Œå‚ç›´è·ç¦»å°äºä¸€å®šç¨‹åº¦
+	// ÅĞ¶ÏÁ½¸ö¾ØĞÎ¿òÊÇ·ñ´¹Ö±ÏàÁÚ
+	// ¿í¶È±ÈÒªÂú×ãÒ»¶¨Ìõ¼ş£¬Ë®Æ½·½Ïò½»µş²¿·ÖÒªÂú×ãÒ»¶¨ÒªÇó£¬´¹Ö±¾àÀëĞ¡ÓÚÒ»¶¨³Ì¶È
 	static inline bool IsVerNeighborRect( s_Rect tempObject1, s_Rect tempObject2, float sizeRatioThresh, float coverRatioThresh, float disRatioThresh )
 	{
 		int width1 = tempObject1.right-tempObject1.left;
@@ -1105,7 +1105,7 @@ extern "C"
 			widthratio = 1.0f/widthratio;
 		}
 
-		// å¦‚æœå®½åº¦æ¯”ç›¸å·®å¤ªå¤§ï¼Œåˆ™è®¤ä¸ºä¸ç®—ç›¸é‚»çŸ©å½¢
+		// Èç¹û¿í¶È±ÈÏà²îÌ«´ó£¬ÔòÈÏÎª²»ËãÏàÁÚ¾ØĞÎ
 		if( widthratio < sizeRatioThresh )
 		{
 			return( false );
@@ -1117,7 +1117,7 @@ extern "C"
 		int coverWidth = coverRight-coverLeft;
 		int avgWidth = (width1+width2+1)/2;
 
-		// æ°´å¹³æ–¹å‘ä¸Šäº¤å éƒ¨åˆ†å¤ªå°ï¼Œåˆ™è®¤ä¸ºä¸ç›¸é‚»äº¤å 
+		// Ë®Æ½·½ÏòÉÏ½»µş²¿·ÖÌ«Ğ¡£¬ÔòÈÏÎª²»ÏàÁÚ½»µş
 		if( coverWidth <= 0 || (coverWidth/(float)avgWidth) < coverRatioThresh )
 		{
 			return( false );
@@ -1129,7 +1129,7 @@ extern "C"
 		int coverHeight = coverBottom-coverTop;
 		//	int avgHeight = (width1+width2+1)/2;
 
-		// å¦‚æœå‚ç›´è·ç¦»å°äºä¸€å®šç¨‹åº¦ï¼Œåˆ™è®¤ä¸ºç›¸äº¤
+		// Èç¹û´¹Ö±¾àÀëĞ¡ÓÚÒ»¶¨³Ì¶È£¬ÔòÈÏÎªÏà½»
 		return( coverHeight >= 0 || (-coverHeight)/(float)max( height1, height2 ) < disRatioThresh );
 	};
 
@@ -1145,7 +1145,7 @@ extern "C"
 		int minArea;
 		int coverArea;
 
-		if( coverLeft < coverRight && coverTop < coverBottom ) // äº¤å 
+		if( coverLeft < coverRight && coverTop < coverBottom ) // ½»µş
 		{
 			area1 = GetRectArea( tempObject1 );
 			area2 = GetRectArea( tempObject2 );
@@ -1167,7 +1167,7 @@ extern "C"
 		}
 	};
 
-	//èåˆåŒºåŸŸåºåˆ—
+	//ÈÚºÏÇøÓòĞòÁĞ
 	static inline int MergeNeighborRect( s_Rect* pRectArray, int rectNum )
 	{
 		int i;
@@ -1190,7 +1190,7 @@ extern "C"
 			pValid[i] = 1;
 		}
 
-		// åˆå¹¶æ°´å¹³æˆ–è€…å‚ç›´ç›¸é‚»åŒºåŸŸ
+		// ºÏ²¢Ë®Æ½»òÕß´¹Ö±ÏàÁÚÇøÓò
 		for( i = 0; i< rectNum; ++ i )
 		{
 			if( pValid[i] == 1 )
@@ -1207,12 +1207,12 @@ extern "C"
 							IsVerNeighborRect( *rect1, *rect2, 0.67f, 0.4f, 0.5f ) || 
 							IsCoverObject( *rect1, *rect2, 0.36 ) )
 						{
-							// èåˆå¹¶æ›´æ–°çŸ©å½¢æ¡†
+							// ÈÚºÏ²¢¸üĞÂ¾ØĞÎ¿ò
 							rect1->left = min( rect1->left, rect2->left );
 							rect1->top = min( rect1->top, rect2->top );
 							rect1->right = max( rect1->right, rect2->right );
 							rect1->bottom = max( rect1->bottom, rect2->bottom );
-							// åˆ é™¤å¦å¤–ä¸€ä¸ªçŸ©å½¢æ¡†
+							// É¾³ıÁíÍâÒ»¸ö¾ØĞÎ¿ò
 							pValid[j] = 0;
 						}
 					}
@@ -1220,7 +1220,7 @@ extern "C"
 			}
 		}
 
-		// åˆ é™¤æ— æ•ˆåŒºåŸŸ
+		// É¾³ıÎŞĞ§ÇøÓò
 		vldOrder = 0;
 		for( i = 0; i< rectNum; ++ i )
 		{
@@ -1236,7 +1236,7 @@ extern "C"
 		return( vldOrder );
 	};
 
-	// int maxdataSizeä¸ºé˜Ÿåˆ—äººè„¸æ•°ç›®
+	// int maxdataSizeÎª¶ÓÁĞÈËÁ³ÊıÄ¿
 	static inline void InitializeRectArray( s_RectArray * pArray, int maxdataSize )
 	{
 		pArray->maxNum = max( 1, maxdataSize ); // can not be zero
@@ -1245,7 +1245,7 @@ extern "C"
 		pArray->pArray = (s_Rect *)malloc( pArray->maxNum*sizeof(s_Rect) );
 	};
 
-	// é‡Šæ”¾é˜Ÿåˆ—å†…å­˜
+	// ÊÍ·Å¶ÓÁĞÄÚ´æ
 	static inline void RemoveRectArray( s_RectArray * pArray )
 	{
 		if( pArray->pArray != NULL )
@@ -1255,7 +1255,7 @@ extern "C"
 		pArray->actNum = 0;
 	};
 
-	//æ ¹æ®èƒ½é‡ç´¯åŠ å’Œæ¥è®¡ç®—é˜ˆå€¼
+	//¸ù¾İÄÜÁ¿ÀÛ¼ÓºÍÀ´¼ÆËããĞÖµ
 	static inline int GetPercentSumIndex( float ratio, float * pHist, int binNum, int vldNum )
 	{
 		int i;
@@ -1288,9 +1288,9 @@ extern "C"
 		}
 	};
 	
-	///////////////// ä¸‹é¢æ˜¯å…³äºæ—‹è½¬çš„å‡½æ•° /////////////////////////////////
+	///////////////// ÏÂÃæÊÇ¹ØÓÚĞı×ªµÄº¯Êı /////////////////////////////////
 	
-	// å¾—åˆ°å°†ä¸¤ä¸ªç‚¹çŸ«æ­£åˆ°æ°´å¹³çš„è§’åº¦
+	// µÃµ½½«Á½¸öµã½ÃÕıµ½Ë®Æ½µÄ½Ç¶È
 	static inline void GetRectifyAngle_64f( double * pSinAngle, double * pCosAngle, s_Point point0, s_Point point1 )
 	{
 		int xDis;
@@ -1306,14 +1306,14 @@ extern "C"
 		(*pCosAngle) = xDis/dis;
 	};
 	
-	// è®¡ç®—ä¸¤ä¸ªè§’åº¦å’Œè§’çš„coså’Œsinå€¼
+	// ¼ÆËãÁ½¸ö½Ç¶ÈºÍ½ÇµÄcosºÍsinÖµ
 	static inline void AddAngle_64f( double * pDesSinAngle, double * pDesCosAngle, double sinAngle0, double cosAngle0, double sinAngle1, double cosAngle1 )
 	{
 		(*pDesSinAngle) = sinAngle0*cosAngle1+cosAngle0*sinAngle1;
 		(*pDesCosAngle) = cosAngle0*cosAngle1-sinAngle0*sinAngle1;
 	};
 	
-	// è®¡ç®—ä¸¤ä¸ªçº¿ä¹‹é—´çš„å¤¹è§’ï¼Œçº¿ç”±ä¸¤ç‚¹å†³å®š
+	// ¼ÆËãÁ½¸öÏßÖ®¼äµÄ¼Ğ½Ç£¬ÏßÓÉÁ½µã¾ö¶¨
 	static inline double GetRotAngle_64f( s_Point srcOriginPoint, s_Point srcPoint2, s_Point desOriginPoint, s_Point desPoint2 )
 	{
 		double rotAngle;
@@ -1360,7 +1360,7 @@ extern "C"
 		return(rotAngle);
 	};
 	
-	// å¾—åˆ°æŸç‚¹srcPointç›¸å¯¹referPointç‚¹æ—‹è½¬rotAngleå¼§åº¦çš„ç»“æœ
+	// µÃµ½Ä³µãsrcPointÏà¶ÔreferPointµãĞı×ªrotAngle»¡¶ÈµÄ½á¹û
 	static inline s_Point_f64 GetReferRotatePoint_f64( s_Point srcPoint, s_Point referPoint, double rotAngle )
 	{
 		s_Point_f64 referDesPoint;
@@ -1372,7 +1372,7 @@ extern "C"
 		return( referDesPoint );
 	};
 	
-	// å°†ç‚¹srcPointç›¸å¯¹ç‚¹srcReferPointæ—‹è½¬ï¼ˆcosRotAngleï¼ŒsinRotAngleï¼‰ï¼Œç„¶åï¼Œåç§»desReferPoint
+	// ½«µãsrcPointÏà¶ÔµãsrcReferPointĞı×ª£¨cosRotAngle£¬sinRotAngle£©£¬È»ºó£¬Æ«ÒÆdesReferPoint
 	static inline s_Point RotatePoint_CosSin( s_Point srcPoint, s_Point srcReferPoint, 
 		s_Point desReferPoint, double cosRotAngle, double sinRotAngle )
 	{
@@ -1385,7 +1385,7 @@ extern "C"
 	};
 
 	// coordinates y is from up to down, and angle is positive when rotate clockwise
-	// sinAngle, float cosAngle, float sizeRatioåˆ†åˆ«ä¸ºæºåæ ‡ç›¸å¯¹ç›®æ ‡åæ ‡çš„æ—‹è½¬è§’åº¦çš„æ­£å¼¦å€¼ï¼Œä½™å¼¦å€¼ä»¥åŠæ”¾ç¼©å°ºåº¦
+	// sinAngle, float cosAngle, float sizeRatio·Ö±ğÎªÔ´×ø±êÏà¶ÔÄ¿±ê×ø±êµÄĞı×ª½Ç¶ÈµÄÕıÏÒÖµ£¬ÓàÏÒÖµÒÔ¼°·ÅËõ³ß¶È
 	// desOriginPoint and the srcOriginPoint is the corresponding point in source image and des image
 	// Rect is the range, left and top is real range, it is enlarged one pixel at right and bottom
 	static inline s_Rect RotateRectRange_CosSin(s_Rect srcRect, s_Point srcOriginPoint, s_Point desOriginPoint, 
@@ -1491,4 +1491,3 @@ extern "C"
 };
 
 #endif // !defined(AFX_BASICDATATYPE_H__AB497EBE_BDF7_45C4_9B78_C54592D6410E__INCLUDED_)
-
