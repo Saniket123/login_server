@@ -2,6 +2,7 @@
 #define LOGIN_SERVER_H
 
 #include <QObject>
+#include <QString>
 #include "tcp_receiver.h"
 
 class login_server : public QObject
@@ -13,8 +14,10 @@ public:
     void start();
 private:
     tcp_receiver *_tcp_receiver;
+    QString *url;
 private slots:
     int recognize(QString file_name);
+    void send_url();
 };
 
 #endif // LOGIN_SERVER_H

@@ -4,12 +4,6 @@ tcp_receiver::tcp_receiver()
 {
     this->total_bytes = this->bytes_received = this->file_name_size = 0;
     connect(&this->tcp_server, SIGNAL(newConnection()), this, SLOT(accept_connection()));
-    connect(this, SIGNAL(img_received(QString)), this, SLOT(send_url(QString)));
-}
-
-void tcp_receiver::send_url(QString url)
-{
-    this->connection_socket->write(url.toAscii(), url.length());
 }
 
 void tcp_receiver::start()

@@ -9,9 +9,9 @@ class tcp_receiver : public QObject
     Q_OBJECT
 public:
     tcp_receiver();
+    QTcpSocket *connection_socket;
 private:
     QTcpServer tcp_server;
-    QTcpSocket *connection_socket;
     qint64 total_bytes;
     qint64 bytes_received;
     qint64 file_name_size;
@@ -22,7 +22,6 @@ private slots:
     void accept_connection();
     void receive();
     void display_error(QAbstractSocket::SocketError socket_error);
-    void send_url(QString url);
     void clean_up();
 signals:
     void img_received(QString file_path);

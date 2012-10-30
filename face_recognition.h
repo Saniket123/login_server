@@ -19,7 +19,6 @@
 #define NORMAL_FACE_RIGHT_EYE_X 47
 #define NORMAL_FACE_RIGHT_EYE_Y 30
 
-typedef unsigned char byte;
 using namespace cv;
 using namespace std;
 
@@ -61,7 +60,7 @@ private:
     double* gallery_face_pca_coeff;
     Cgt_Eye iris_point;
     byte *gray_img;
-    byte face_img_gray[1024 * 4];
+    byte face_img_gray[1024 * 512];
     Cgt_Rect area;
 
     int w,h;
@@ -101,9 +100,7 @@ public:
     int init_func(byte *face_img_g)
     {
         this->gray_img = face_img_g;
-        fprintf(stderr, "aaaaaaaaaa");
         this->pca_model = new PCAModel("PCAModel.bin"); //读取人脸识别PCA模型
-        fprintf(stderr, "bbbbbbbbbbbb");
         this->gallery_face_pca_coeff = load_gallery_data(gallery_people_num, pca_model, "GalleryPeopleNum.ini", "GalleryPCACoeff.bin"); //读取罪犯人脸库
     }
     int release_func()
@@ -123,6 +120,7 @@ public:
         double* input_face_pca_coeff = new double[pca_model->m_nPCADim];
         pca_model->ComputePCACoeff(face_img_gray, input_face_pca_coeff);
         double curSim = compute_vec_sim(input_face_pca_coeff, &gallery_face_pca_coeff[people_id * pca_model->m_nPCADim], pca_model->m_nPCADim);
+        delete []input_face_pca_coeff;
         if (curSim >= threshold)
             return 1;
         else
@@ -157,7 +155,6 @@ public:
 
             float cosAngle = AffineMatrix[0] / dR;
             float sinAngle = AffineMatrix[1] / dR;
-
             AffineTranImg_CenterSizeAngle_1D(face_img_gray, MIN_FACE_WIDTH, MIN_FACE_HEIGHT, NormReferPt,
                 gray_img, IMG_WIDTH, IMG_HEIGHT, OriReferPt, sinAngle, cosAngle, dR, 1, 2);
 
@@ -166,54 +163,52 @@ public:
     bool get_face_parameters()
     {
         w = 640, h = 480;
-     static CascadeClassifier cascadeFace;
-     static CascadeClassifier cascadeEye, cascadeLeftEye, cascadeRightEye;
-     String cascadeFaceName = "haarcascade_frontalface_alt.xml";
-     String cascadeEyeName = "haarcascade_eye.xml";
-     //String cascadeEyeName = "haarcascade_eye_tree_eyeglasses.xml";
-     String cascadeRightEyeName = "haarcascade_lefteye_2splits.xml"; //这个左右眼的分类器似乎是针对镜像的人脸图像，这里需要反过来用
-     String cascadeLeftEyeName = "haarcascade_righteye_2splits.xml";
-     bool useSingleEyeClassifier = true;
+        static CascadeClassifier cascadeFace;
+        static CascadeClassifier cascadeEye, cascadeLeftEye, cascadeRightEye;
+        String cascadeFaceName = "haarcascade_frontalface_alt.xml";
+        String cascadeEyeName = "haarcascade_eye.xml";
+        //String cascadeEyeName = "haarcascade_eye_tree_eyeglasses.xml";
+        String cascadeRightEyeName = "haarcascade_lefteye_2splits.xml"; //这个左右眼的分类器似乎是针对镜像的人脸图像，这里需要反过来用
+        String cascadeLeftEyeName = "haarcascade_righteye_2splits.xml";
+        bool useSingleEyeClassifier = true;
 
-     bool nRetCode = false;
-     vector<Rect> faces;
-     static bool classifierInitialized = false;
+        bool nRetCode = false;
+        vector<Rect> faces;
+        static bool classifierInitialized = false;
 
-     if(classifierInitialized==false)
-     {
-      //load classifier
-      if( !cascadeFace.load( cascadeFaceName ) )
-      {
-            fprintf(stderr, "Could not load face classifier cascade!");
-            exit(1);
-      }
-      if(useSingleEyeClassifier)
-      {
-       if( !cascadeEye.load( cascadeEyeName ) )
-       {
-            fprintf(stderr, "Could not load eye classifier cascade!");
-            exit(1);
-       }
-      }
-      else
-      {
-       if( !cascadeLeftEye.load( cascadeLeftEyeName ) )
-       {
-            fprintf(stderr, "Could not load left eye classifier cascade!");
-            exit(1);
-       }
-       if( !cascadeRightEye.load( cascadeRightEyeName ) )
-       {
-            fprintf(stderr, "Could not load right eye classifier cascade!");
-            exit(1);
-       }
-      }
+        if(classifierInitialized == false)
+        {
+            //load classifier
+            if(!cascadeFace.load( cascadeFaceName))
+            {
+                fprintf(stderr, "Could not load face classifier cascade!");
+                exit(1);
+            }
+            if(useSingleEyeClassifier)
+            {
+                if(!cascadeEye.load( cascadeEyeName))
+                {
+                    fprintf(stderr, "Could not load eye classifier cascade!");
+                    exit(1);
+                }
+            } else {
+                if(!cascadeLeftEye.load(cascadeLeftEyeName))
+                {
+                    fprintf(stderr, "Could not load left eye classifier cascade!");
+                    exit(1);
+                }
+                if(!cascadeRightEye.load(cascadeRightEyeName))
+                {
+                    fprintf(stderr, "Could not load right eye classifier cascade!");
+                    exit(1);
+                }
+            }
 
-      classifierInitialized = true;
-     }
+            classifierInitialized = true;
+        }
      // 似乎刚打开摄像头时可能w/h<=0，在这里判断一下。
-     if( (gray_img == NULL) || (w<=0) || (h<=0) )
-      return false;
+     if((gray_img == NULL) || (w<=0) || (h<=0))
+         return false;
      //将输入的gray_image转换为IplImage类型，然后转为Mat
      IplImage* IplOrigImage = cvCreateImageHeader(cvSize(w,h), IPL_DEPTH_8U, 1);
      //IplOrigImage->origin = ~IplOrigImage->origin;  //origin控制图像自上而下还是自下而上
@@ -313,6 +308,8 @@ public:
       cvDestroyWindow("face area");
 
      }
+     //why?????????????
+     //cvReleaseImage(&IplOrigImage);
      return nRetCode;
     }
 
