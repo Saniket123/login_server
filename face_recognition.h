@@ -60,8 +60,10 @@ private:
     double* gallery_face_pca_coeff;
     Cgt_Eye iris_point;
     byte *gray_img;
-    byte face_img_gray[1024 * 512];
+    byte face_img_gray[64 * 80];
     Cgt_Rect area;
+
+    IplImage *IplOrigImage;
 
     int w,h;
 
@@ -97,9 +99,10 @@ public:
     {
     }
 
-    int init_func(byte *face_img_g)
+    int init_func(IplImage *img_ipl)
     {
-        this->gray_img = face_img_g;
+        this->IplOrigImage = img_ipl;
+        this->gray_img = (unsigned char *)img_ipl->imageDataOrigin;
         this->pca_model = new PCAModel("PCAModel.bin"); //读取人脸识别PCA模型
         this->gallery_face_pca_coeff = load_gallery_data(gallery_people_num, pca_model, "GalleryPeopleNum.ini", "GalleryPCACoeff.bin"); //读取罪犯人脸库
     }
@@ -113,7 +116,7 @@ public:
     // pPCAModel：PCA模型 由InitialFunc得到
     // pFaceImgGray：输入的Face，必须是灰度图 由Face Detection和Eye Location得到
     // pGalleryFacePCACoeff：已经建模的人脸库中的Face的PCA系数 由InitialFunc得到
-    int _face_recognition(int people_id, double threshold = 10.0)//PCAModel * pca_model, byte* face_img_gray, double* gallery_face_pca_coeff, int people_id, int gallery_people_num, double threshold/*阈值*/)
+    int _face_recognition(int people_id, double threshold = 0.8)//PCAModel * pca_model, byte* face_img_gray, double* gallery_face_pca_coeff, int people_id, int gallery_people_num, double threshold/*阈值*/)
     {
         if(people_id >= gallery_people_num)
             return -1;
@@ -121,6 +124,7 @@ public:
         pca_model->ComputePCACoeff(face_img_gray, input_face_pca_coeff);
         double curSim = compute_vec_sim(input_face_pca_coeff, &gallery_face_pca_coeff[people_id * pca_model->m_nPCADim], pca_model->m_nPCADim);
         delete []input_face_pca_coeff;
+        fprintf(stderr, "%f\n", curSim);
         if (curSim >= threshold)
             return 1;
         else
@@ -170,7 +174,7 @@ public:
         //String cascadeEyeName = "haarcascade_eye_tree_eyeglasses.xml";
         String cascadeRightEyeName = "haarcascade_lefteye_2splits.xml"; //这个左右眼的分类器似乎是针对镜像的人脸图像，这里需要反过来用
         String cascadeLeftEyeName = "haarcascade_righteye_2splits.xml";
-        bool useSingleEyeClassifier = true;
+        bool useSingleEyeClassifier = false;
 
         bool nRetCode = false;
         vector<Rect> faces;
@@ -210,10 +214,10 @@ public:
      if((gray_img == NULL) || (w<=0) || (h<=0))
          return false;
      //将输入的gray_image转换为IplImage类型，然后转为Mat
-     IplImage* IplOrigImage = cvCreateImageHeader(cvSize(w,h), IPL_DEPTH_8U, 1);
+     //IplImage* IplOrigImage = cvCreateImageHeader(cvSize(w,h), IPL_DEPTH_8U, 1);
      //IplOrigImage->origin = ~IplOrigImage->origin;  //origin控制图像自上而下还是自下而上
 //////////////     cvSetData(IplOrigImage, gray_image, w*1);
-     cvSetData(IplOrigImage, gray_img, w*1);
+     //cvSetData(IplOrigImage, gray_img, w*1);
      Mat matImg = IplOrigImage;
      //imshow("flipped img", matImg);
      //cvWaitKey(0);
@@ -308,8 +312,7 @@ public:
       cvDestroyWindow("face area");
 
      }
-     //why?????????????
-     //cvReleaseImage(&IplOrigImage);
+/*     cvReleaseImage(&IplOrigImage);*/
      return nRetCode;
     }
 

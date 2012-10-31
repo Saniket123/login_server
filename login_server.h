@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QUuid>
 #include "tcp_receiver.h"
 
 class login_server : public QObject
@@ -15,9 +16,10 @@ public:
 private:
     tcp_receiver *_tcp_receiver;
     QString *url;
+    QString s_code;
 private slots:
     int recognize(QString file_name);
-    void send_url();
+    void send_s_code(bool is_loggedin);
 };
 
 #endif // LOGIN_SERVER_H

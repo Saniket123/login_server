@@ -19,7 +19,7 @@ void tcp_receiver::start()
 void tcp_receiver::accept_connection()
 {
     this->connection_socket = this->tcp_server.nextPendingConnection();
-    connect(this->connection_socket, SIGNAL(readyRead()), this, SLOT(receive()));
+    connect(this->connection_socket, SIGNAL(readyRead()), this, SLOT(receive_username()));
     connect(this->connection_socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(display_error(QAbstractSocket::SocketError)));
 //    this->tcp_server.close();
 }
@@ -28,6 +28,23 @@ void tcp_receiver::display_error(QAbstractSocket::SocketError socket_error)
 {
     qDebug() << "ooooooooooooooooooooooooo" << connection_socket->errorString();
     connection_socket->close();
+}
+
+void tcp_receiver::receive_username()
+{
+    this->username.clear();
+    this->username = this->connection_socket->readLine();
+    qDebug() << "received user name:" << this->username;
+    this->send_confirm_username();
+}
+void tcp_receiver::send_confirm_username()
+{
+    qDebug() << "sending confirm user name";
+    this->connection_socket->write(this->username.toAscii(), this->username.length());
+    disconnect(this->connection_socket, SIGNAL(readyRead()), this, SLOT(receive_username()));
+    connect(this->connection_socket, SIGNAL(readyRead()), this, SLOT(receive()));
+    this->connection_socket->waitForReadyRead(10000);
+    receive();
 }
 
 void tcp_receiver::clean_up()
@@ -68,6 +85,9 @@ void tcp_receiver::receive()
 //    this->connection_socket->close();
     this->local_file->close();
        clean_up();
+       qDebug() << "img received done!";
     emit img_received(this->local_file->fileName());
-   }
+    disconnect(this->connection_socket, SIGNAL(readyRead()), this, SLOT(receive()));
+    connect(this->connection_socket, SIGNAL(readyRead()), this, SLOT(receive_username()));
+    }
 }
